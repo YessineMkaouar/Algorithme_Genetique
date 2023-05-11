@@ -14,6 +14,7 @@ def create_file(L: list, nbr_population: int, nbr_iteration: int):
 def generate_sequence(L):
     res = ''.join(L)
     res = res.replace('--', '+')  # remplace les '--' par des '+'
+    res = res.replace('+-', '-')  # remplace les '+-' par des '-'
     if res.startswith('+'):  # vérifie si la chaîne commence par '+'
         res = res[1:]  # supprime le premier caractère s'il est '+'
     return res

@@ -5,10 +5,10 @@ st.write("""
 # Interface Graphique - Algorithmes Génétiques
 ## Projet IN104
 ### Problème de la somme des sous-ensembles
-Veuillez entrer un ensemble sous la forme : nbr1 nbr2 nbr3 ...
+
 
 """)
-user_input = st.text_input("Veuillez entrer votre message :")
+user_input = st.text_input("Veuillez entrer un ensemble sous la forme : nbr1 nbr2 nbr3 ... :")
 submit_button = st.button("Envoyer")
 
 
@@ -26,11 +26,11 @@ if submit_button:
     fitness = calculate_sum(response)
     st.write("La solution est ")
     st.write(" ".join(solution))
-    st.write("fitness = {}".format(fitness))
+    st.write("Fitness = {}".format(fitness))
 
 from PIL import Image
 
 img = Image.open("logo_TA.jpg")
 new_size = (500, 500)
 img = img.resize(new_size)
-st.image(img, caption="My Image", use_column_width=True)
+st.image(img, caption="TA", use_column_width=True)
