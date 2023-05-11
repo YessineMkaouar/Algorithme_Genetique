@@ -31,19 +31,20 @@ int main()
     fclose(f); // Fermer le fichier
 
 
-    /********________________________Saisie des param�tres en entr�e____________________________********/
-    printf("Number of units par generation  : ");
-    scanf("%d",&n); //  read the size of the population in each generation
-    printf("Number of iteration  : ");
-    scanf("%d",&num_iteration); //  read the number of iterations
+    /*******______Saisie des paramétres en entrée_________********/
+
+    printf("Nombre d'individu par génération  : "); 
+    scanf("%d",&n); //Lire la taille de la population des générations
+    printf("Nombre d'itération  : ");
+    scanf("%d",&num_iteration); // Lire le nombre d'itérations 
 
 
-   /********___________________________________Initialisation__________________________________********/
-    gen = getInitialGeneration(n,t,l); //  generate the initial generation
-    best = getCopy(gen,l); // get the best element and store it
-    bestScore = best->value; // update the best score
-    clock_t tic = clock(); // start time of computation
+   /********_________________Initialisation________________*******/
 
+    gen = getInitialGeneration(n,t,l); // Générer la génération initiale
+    best = getCopy(gen,l); // Obtenir le meilleur élément et le stocker
+    bestScore = best->value; // Mettre à jour le meilleur score
+    clock_t tic = clock(); // Démarrer le chronomètre de calcul
 
 
     for(int i=0;i<num_iteration;i++)
@@ -64,6 +65,40 @@ int main()
     printf("Elapsed: %f seconds\n", (double)(toc - tic) / CLOCKS_PER_SEC); // print the execution time
     printf("bestScore = %d\n",bestScore); //  print the best score
     printIndiv(best,t,l);    // show the individual
+    return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+typedef struct {
+    int *DNA;
+} Individu;
+
+int fitness(Individu * ind , int l , int*t){
+    // fonction pour calculer la valeur de forme physique d'un individu
+    int sum=0;
+    for(int i=0;i<l;i++){
+        sum+=(ind->DNA[i]-1)*t[i];
+    }
+    return abs(sum);
+}
+int main() {
+    // créer un tableau d'ADN d'exemple
+    int DNA_array[] = {2, 1, 1, 0, 0};
+    int l = sizeof(DNA_array) / sizeof(int);
+    // créer un objet Individu avec le tableau d'ADN
+    Individu * indiv = (Individu *) malloc(sizeof(Individu));
+    indiv->DNA = DNA_array;
+    // créer un tableau de poids d'exemple
+    int weight_array[] = {5, 3, 2, 4, 1};
+    // appeler la fonction fitness pour calculer la valeur de forme physique de l'individu
+    int result = fitness(indiv, l, weight_array);
+    // afficher le résultat
+    printf("La valeur de forme physique de l'individu est: %d\n", result);
+    // libérer la mémoire allouée pour l'objet Individu
+    free(indiv);
     return 0;
 }
 
