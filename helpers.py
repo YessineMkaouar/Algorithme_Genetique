@@ -2,7 +2,6 @@ def run_command(command):
     import subprocess
     try:
         subprocess.run(command, shell=True, check=True)
-        print("Command executed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Command execution failed with error code {e.returncode}: {e.output}")
 
