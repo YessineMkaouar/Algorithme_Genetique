@@ -276,6 +276,7 @@ void printIndiv(Individu * indiv, int *t, int l){
     }
     printf("\n");
     printf("set size = %d",l-cnt);
+    printf("\n");
 }
 
 
