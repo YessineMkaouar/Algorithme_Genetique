@@ -38,7 +38,7 @@ int main()
 
     for(int i=0;i<num_iteration;i++)
         {
-        /********___________________________________S�lection/Reproduction__________________________________********/
+        /********___________________________________Sélection/Reproduction__________________________________********/
         gen = addChildGen(gen,n,l,t); // generate and add the child generation
         gen = GetBestElements(gen,n); // get the best n element from the last population
         if(cmp(gen,best)){ //  if the new best element is better than the last best we update it
