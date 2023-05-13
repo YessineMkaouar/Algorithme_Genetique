@@ -1,4 +1,5 @@
 import streamlit as st
+import subprocess
 from helpers import run_genetic_algorithm,create_file,generate_sequence,calculate_sum
 nb_pop=125
 nb_iter=200
@@ -33,13 +34,17 @@ def generate_response(user_input,nb_pop,nb_iter):
     return response
 
 if submit_button:
-    response = generate_response(user_input,int(nb_pop_input),int(nb_iter_input))
-    solution = generate_sequence(response)
-    fitness = calculate_sum(response)
-    st.write("La solution est : ")
-    st.write(solution)
-    st.write("Fitness = {}".format(fitness))
-
+    try :
+        response = generate_response(user_input,int(nb_pop_input),int(nb_iter_input))
+        solution = generate_sequence(response)
+        fitness = calculate_sum(response)
+        st.write("La solution est : ")
+        st.write(solution)
+        st.write("Fitness = {}".format(fitness))
+    except subprocess.CalledProcessError as e : 
+        st.write("Veuillez entrer un ensemble de taille > 3")
+    
+        
 from PIL import Image
 
 img = Image.open("logo_TA.jpg")
