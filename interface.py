@@ -1,7 +1,7 @@
 import streamlit as st
 from helpers import run_genetic_algorithm,create_file,generate_sequence,calculate_sum
-nb_pop=0
-nb_iter=0
+nb_pop=125
+nb_iter=200
 st.write("""
 # Interface Graphique - Algorithmes Génétiques
 ## Projet IN104
@@ -9,21 +9,22 @@ st.write("""
 
 
 """)
-nb_pop_input = st.text_input("Veuillez entrer la taille de la population :")
-nb_pop_submit_button = st.button("Entrer")
-if nb_pop_submit_button:
-    nb_pop = int(nb_pop_input)
+with st.sidebar:
+    nb_pop_input = st.text_input("Veuillez entrer la taille de la population :")
+    nb_pop_submit_button = st.button(label = "Entrer la taille de la population")
+    if nb_pop_submit_button:
+        nb_pop = int(nb_pop_input)
 
-nb_iter_input = st.text_input("Veuillez entrer le nombre d'itérations :")
-nb_iter_submit_button = st.button("Send")
-if nb_iter_submit_button:
-    nb_iter = int(nb_iter_input)
+    nb_iter_input = st.text_input("Veuillez entrer le nombre d'itérations :")
+    nb_iter_submit_button = st.button(label = "Entrer le nombre d'itérations")
+    if nb_iter_submit_button:
+        nb_iter = int(nb_iter_input)
 
 user_input = st.text_input("Veuillez entrer un ensemble sous la forme : nbr1 nbr2 nbr3 ... :")
 submit_button = st.button("Envoyer")
 
 
-def generate_response(user_input):
+def generate_response(user_input,nb_pop,nb_iter):
 
     L = user_input.split()
     L = [int(x) for x in L]
@@ -32,11 +33,11 @@ def generate_response(user_input):
     return response
 
 if submit_button:
-    response = generate_response(user_input)
+    response = generate_response(user_input,int(nb_pop_input),int(nb_iter_input))
     solution = generate_sequence(response)
     fitness = calculate_sum(response)
     st.write("La solution est : ")
-    st.write(" ".join(solution))
+    st.write(solution)
     st.write("Fitness = {}".format(fitness))
 
 from PIL import Image
