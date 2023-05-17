@@ -4,9 +4,9 @@
 
 typedef struct _individu{
     int * DNA; // configuration
-    int value; // fitness value
-    int nb; // number of "on" elements in the set
-    struct _individu * next; // next element in the linked list
+    int value; // valeur du fitness
+    int nb; // cardinal du sous ensemble associé
+    struct _individu * next; // next element dans la liste chainée
 }Individu;
 
 Individu * getNewIndividu(int l, int *t);

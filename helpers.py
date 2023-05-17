@@ -1,25 +1,25 @@
 def run_command(command):
     import subprocess
     try:
-        subprocess.run(command, shell=True, check=True)
+        subprocess.run(command, shell=True, check=True)  # Exécute la commande spécifiée dans un sous-processus
     except subprocess.CalledProcessError as e:
-        print(f"Command execution failed with error code {e.returncode}: {e.output}")
-
+        print(f"Échec de l'exécution de la commande avec le code d'erreur {e.returncode} : {e.output}")
 
 def run_genetic_algorithm():
     import subprocess
     command = "gcc -o program_for_interface main_for_interface.c utils.c"
-    run_command(command)
-    output = subprocess.check_output(["./program_for_interface"]) #Lire l'output du main_interface
-    best = output.decode('utf-8').split() #Convertir l'output en liste
+    run_command(command)  # Exécute la commande pour compiler le programme principal
+    output = subprocess.check_output(["./program_for_interface"])  # Lit la sortie du programme principal
+    best = output.decode('utf-8').split()  # Convertit la sortie en liste
     return best
 
 def create_file(L: list, nbr_population: int, nbr_iteration: int):
     with open("test0.txt", "w") as f:
-        f.write(str(nbr_population) + "\n")
-        f.write(str(nbr_iteration) + "\n")
-        f.write(str(len(L)) + "\n")
-        f.write(" ".join(map(str, L)))
+        f.write(str(nbr_population) + "\n")  # Écrit le nombre de populations dans le fichier
+        f.write(str(nbr_iteration) + "\n")  # Écrit le nombre d'itérations dans le fichier
+        f.write(str(len(L)) + "\n")  # Écrit la taille de la liste dans le fichier
+        f.write(" ".join(map(str, L)))  # Écrit les éléments de la liste séparés par des espaces dans le fichier
+
 
 def generate_sequence(L):
     res = ''.join(L)
